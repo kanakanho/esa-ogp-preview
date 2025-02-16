@@ -73,7 +73,7 @@ app.get('/ogp', async (c) => {
 })
 
 app.get('/ogp/svg', async (c) => {
-  const { url, width } = c.req.query()
+  const { url, width, img } = c.req.query()
   if (!url) {
     return c.json({
       error: 'URL is required',
@@ -108,7 +108,16 @@ app.get('/ogp/svg', async (c) => {
     if (metaData.data === undefined) {
       throw new Error('Data is empty')
     }
-    const buffer = await fetch(metaData.data.image).then(res => res.arrayBuffer())
+
+    let buffer: Buffer
+    if (img !== 'false') {
+      buffer = await fetch(metaData.data.image).then(res => res.arrayBuffer())
+    }
+    else {
+      buffer = Buffer.from('')
+      metaData.data.image = ''
+    }
+
     const imageBuffer = Buffer.from(buffer).toString('base64')
     const text = (
       <CardSVG metaData={metaData.data} imageBuffer={imageBuffer} width={widthNum} />

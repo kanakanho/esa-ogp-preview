@@ -32,3 +32,14 @@ https://esa-ogp-preview.kanakanho.workers.dev/ogp/svg?url=https://kanakanho.dev&
 表示例
 
 ![](https://esa-ogp-preview.kanakanho.workers.dev/ogp/svg?url=https://kanakanho.dev&width=1000)
+
+> [!TIP]
+> クエリパラメータに `img=false` を設定することで ogp 画像の読み込みを無視できます。
+
+```md
+https://esa-ogp-preview.kanakanho.workers.dev/ogp/svg?url=https://kanakanho.dev&img=false
+```
+
+表示例
+
+![](https://esa-ogp-preview.kanakanho.workers.dev/ogp/svg?url=https://kanakanho.dev&width=1000&img=false)

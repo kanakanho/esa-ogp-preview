@@ -23,7 +23,7 @@ function CardSVG({ metaData, imageBuffer, width }: Props) {
             </>
           )
         : (
-            <rect x="0" y="0" width={`${imageWidth}px`} height="126px" fill="#f0f0f0" rx="10" />
+            <rect x={width - 126} y="0" width={`${width}px`} height="126px" fill="#fff" fill-opacity="0" rx="10" />
           )}
     </svg>
   )
