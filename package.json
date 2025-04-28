@@ -13,17 +13,17 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.13.0",
+    "@antfu/eslint-config": "4.12.0",
     "@cloudflare/workers-types": "^4.20250109.0",
     "@eslint-react/eslint-plugin": "^1.23.2",
     "@eslint/js": "^9.17.0",
-    "@types/node": "^22.10.9",
+    "@types/node": "^22.15.2",
     "eslint": "^9.18.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
-    "globals": "^15.14.0",
+    "globals": "16.0.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0",
-    "wrangler": "^3.101.0"
+    "wrangler": "4.13.2"
   }
 }

@@ -6,9 +6,10 @@ compatibility_flags = [ "nodejs_compat" ]
 # [vars]
 # MY_VAR = "my-variable"
 
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "esa_ogp_preview_svg_cache"
+id = "ee7d19e651114cd29f2e04bbb3c85c2c"
+preview_id = "e082dfde5a8b40c1b1330bd35434c616"
 
 # [[r2_buckets]]
 # binding = "MY_BUCKET"

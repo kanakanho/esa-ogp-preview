@@ -16,7 +16,17 @@ const MetaDataSchema = z.object({
 
 export type MetaData = z.infer<typeof MetaDataSchema>
 
-const app = new Hono()
+const KVKeySchema = z.object({
+  url: z.string(),
+  width: z.number(),
+  img: z.boolean(),
+})
+
+type Env = {
+  esa_ogp_preview_svg_cache: KVNamespace
+}
+
+const app = new Hono<{ Bindings: Env }>()
 
 const Layout: FC = (props) => {
   const { children } = props
@@ -73,7 +83,23 @@ app.get('/ogp', async (c) => {
 })
 
 app.get('/ogp/svg', async (c) => {
-  const { url, width, img } = c.req.query()
+  const { url, width, img, cache } = c.req.query()
+  const kv = c.env.esa_ogp_preview_svg_cache
+
+  const cacheKey = JSON.stringify(
+    KVKeySchema.parse({
+      url,
+      width: width ? Number(width) || 700 : 700,
+      img: img !== 'false',
+    }),
+  )
+  if (cache !== 'false') {
+    const cachedSVG = await kv.get(cacheKey)
+    if (cachedSVG) {
+      c.header('Content-Type', 'image/svg+xml')
+      return c.body(cachedSVG)
+    }
+  }
   if (!url) {
     return c.json({
       error: 'URL is required',
@@ -119,11 +145,14 @@ app.get('/ogp/svg', async (c) => {
     }
 
     const imageBuffer = Buffer.from(buffer).toString('base64')
-    const text = (
+    const svgContent = (
       <CardSVG metaData={metaData.data} imageBuffer={imageBuffer} width={widthNum} />
     ).toString()
+    // Store SVG in KV
+    await kv.put(cacheKey, svgContent)
+
     c.header('Content-Type', 'image/svg+xml')
-    return c.body(text)
+    return c.body(svgContent)
   }
   catch (e: unknown) {
     if (e instanceof Error) {
