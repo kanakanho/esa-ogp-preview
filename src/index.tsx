@@ -89,7 +89,7 @@ app.get('/ogp/svg', async (c) => {
   const cacheKey = JSON.stringify(
     KVKeySchema.parse({
       url,
-      width: width ? Number(width) || 700 : 700,
+      width: width ? Number(width) || 1000 : 1000,
       img: img !== 'false',
     }),
   )
@@ -106,7 +106,7 @@ app.get('/ogp/svg', async (c) => {
     })
   }
 
-  const widthNum = width ? Number(width) || 0 : 700
+  const widthNum = width ? Number(width) || 0 : 1000
   if (widthNum === 0) {
     return c.json({
       error: 'width is invalid',
