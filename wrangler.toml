@@ -6,6 +6,9 @@ compatibility_flags = [ "nodejs_compat" ]
 # [vars]
 # MY_VAR = "my-variable"
 
+[browser]
+binding = "esa_ogp_preview_browser"
+
 [[kv_namespaces]]
 binding = "esa_ogp_preview_svg_cache"
 id = "ee7d19e651114cd29f2e04bbb3c85c2c"
